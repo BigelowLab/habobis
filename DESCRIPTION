@@ -1,0 +1,18 @@
+Package: habobis
+Title: habobis - HAB data from OBIS
+Description: Access and manage HAB species observations form OBIS.
+URL: https://github.com/BigelowLab/habobis
+Version: 0.1
+Depends:
+    R (>= 4.1)
+Imports:
+    rlang,
+    robis,
+    readr,
+    dplyr,
+    sf
+Maintainer: Ben Tupper <btupper@bigelow.org>
+Author: Kenny Douyon <wjdouy23@colby.edu>, Nick Record <nrecord@bigelow.org>, Ben Tupper <btupper@bigelow.org>
+License: MIT + file LICENSE
+Encoding: UTF-8
+RoxygenNote: 7.1.2

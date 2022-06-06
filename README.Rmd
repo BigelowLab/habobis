@@ -1,0 +1,83 @@
+---
+title: "Harmful Agal Bloom species in OBIS"
+output: github_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(dplyr)
+```
+
+
+### Requirements
+
++ [R v4.1+]()
++ [rlang](https://CRAN.R-project.org/package=rlang)
++ [robis](https://CRAN.R-project.org/package=robis)
++ [readr](https://CRAN.R-project.org/package=readr)
++ [dplyr](https://CRAN.R-project.org/package=dplyr)
++ [sf](https://CRAN.R-project.org/package=sf)
+
+### Installation
+
+```
+remotes::install_github("BigelowLab/habobis")
+```
+
+### Data storage
+
+This package downloads, stores and minipulates a subset of OBIS data records for user specified species.
+In an effort to make this work in your location of choice we provide you with the tools to define a data path we call `root_path`, but you can always override the default.
+
+The easiest way to set the path is to create a hidden text file in your home directory, `~/.habobis`.  The file needs only one line of information: the path to the data set. For example, the author's has this `/mnt/ecocast/coredata/obis/hab`. This works well because it persists across R sessions.
+
+You can also set it per session using `options(habobis_root = "/put/your/path/here")`.
+
+### Read and fetching data - a blurred distinction.
+
+You can explicity download a species.
+
+```{r}
+suppressPackageStartupMessages({
+  library(habobis)
+  library(dplyr)
+})
+x <- fetch_species("Alexandrium affine")
+glimpse(x)
+```
+
+But you can also simply **read** by species.  If you haven't already downloaded that species then it will be fetched for you.
+
+```{r}
+y <- read_species("Alexandrium andersonii")
+glimpse(y)
+```
+
+### Reading multiple species
+
+You can read more than one species at a time and bind them into one table.
+
+```{r}
+x <- read_species(c("Alexandrium affine", "Alexandrium andersonii"), bind = TRUE)
+count(x, scientificName)
+```
+
+### Read as spatial objects
+
+```{r}
+library(sf)
+library(leaflet)
+x <- read_species(c("Alexandrium affine", "Alexandrium andersonii"), bind = TRUE, form = "sf") |>
+  group_by(scientificName)
+
+pal <- colorFactor(
+  palette.colors(n = nrow(group_data(x))),
+  group_data(x)$scientificName,
+  na.color = "#808080"
+)
+
+leaflet(data = x) |>
+  addTiles() |>
+  addCircleMarkers(color = ~pal(scientificName)) |>
+  addLegend(pal = pal, values = ~scientificName, opacity = 1)
+```

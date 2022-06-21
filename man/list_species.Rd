@@ -6,14 +6,14 @@
 \usage{
 list_species(
   path = get_path(),
-  form = c("filename", "scientificname")[1],
+  form = c("filename", "scientificName")[1],
   pattern = "^.*\\\\.csv\\\\.gz$"
 )
 }
 \arguments{
 \item{path}{chr, path of species data folder}
 
-\item{form}{character, one of 'filename' (default) or 'scientificname'}
+\item{form}{character, one of 'filename' (default) or 'scientificName'}
 
 \item{pattern}{charcater, regex pattern for \{code{\link[base]{list.files}}}
 }

@@ -5,14 +5,14 @@
 \title{Fetch a species from OBIS}
 \usage{
 fetch_species(
-  scientificname = "Alexandrium affine",
-  save_file = file_name(scientificname),
+  scientificName = "Alexandrium affine",
+  save_file = file_name(scientificName),
   template = species_template(),
   ...
 )
 }
 \arguments{
-\item{scientificname}{character, the Latin name for a species}
+\item{scientificName}{character, the Latin name for a species}
 
 \item{save_file}{NA or a path specification to save the file}
 

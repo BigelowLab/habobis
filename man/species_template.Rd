@@ -4,10 +4,12 @@
 \alias{species_template}
 \title{Generate a dummy template of data}
 \usage{
-species_template(n = 1)
+species_template(n = 1, eventDate_type = c("character", "date")[1])
 }
 \arguments{
 \item{n}{numeric, the number of rows to create}
+
+\item{eventDate_type}{character, what class should eventDate be?}
 }
 \value{
 tibble

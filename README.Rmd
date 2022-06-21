@@ -36,7 +36,7 @@ You can also set it per session using `options(habobis_root = "/put/your/path/he
 
 You can explicity download a species.
 
-```{r}
+```{r, message = FALSE}
 suppressPackageStartupMessages({
   library(habobis)
   library(dplyr)

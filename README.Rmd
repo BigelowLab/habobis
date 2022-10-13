@@ -58,7 +58,7 @@ You can read more than one species at a time and bind them into one table.
 
 ```{r}
 x <- read_species(c("Alexandrium affine", "Alexandrium andersonii"), bind = TRUE)
-count(x, scientificName)
+count(x, scientificname)
 ```
 
 ### Read as spatial objects

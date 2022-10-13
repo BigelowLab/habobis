@@ -5,22 +5,22 @@
 \title{Fetch a species from OBIS}
 \usage{
 fetch_species(
-  scientificName = "Alexandrium affine",
-  save_file = file_name(scientificName),
+  scientificname = "Alexandrium affine",
+  save_file = file_name(scientificname),
   template = species_template(),
   ...
 )
 }
 \arguments{
-\item{scientificName}{character, the Latin name for a species}
+\item{scientificname}{character, the Latin name for a species}
 
 \item{save_file}{NA or a path specification to save the file}
 
-\item{...}{other arguments for \code{\link[robis]{occurrence}}}
-
-\item{fields}{character or NULL, set to a charcater vector of desired fields, or 
+\item{template}{character or NULL, set to a charcater vector of desired fields, or 
 NULL to retrieve all available fields.  Programmatically, it is better to specify the 
 desired fields so that for each species the output has the same species.}
+
+\item{...}{other arguments for \code{\link[robis]{occurrence}}}
 }
 \value{
 tibble, possibly empty if a species is not found

@@ -78,11 +78,11 @@ file_name <- function(x = 'Alexandrium affine',
 #' 
 #' @export
 #' @param path chr, path of species data folder
-#' @param form character, one of 'filename' (default) or 'scientificName'
+#' @param form character, one of 'filename' (default) or 'scientificname'
 #' @param pattern charcater, regex pattern for \{code{\link[base]{list.files}}
 #' @return character vector of species within folder as filename or scientific name
 list_species <- function(path = get_path(), 
-                         form = c("filename", "scientificName")[1],
+                         form = c("filename", "scientificname")[1],
                          pattern = "^.*\\.csv\\.gz$") {
   
   x = list.files(path, pattern = "^.*\\.csv\\.gz$", full.names = TRUE)
@@ -110,7 +110,7 @@ fetch_fields <- function(){
 species_template <- function(n = 1, eventDate_type = c("character", "date")[1]){
   x <- dplyr::tibble(
     id                 = paste("void", seq_len(n), sep = "_"),
-    scientificName     = "",
+    scientificname     = "",
     eventDate          = "",
     decimalLongitude   = NA_real_,
     decimalLatitude    = NA_real_,

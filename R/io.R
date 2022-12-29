@@ -49,6 +49,7 @@ fetch_species <- function(scientificname = 'Alexandrium affine',
 #'   it be fetched from obis?
 #' @param bind logical, if TRUE and multiple species are read, bind them into one data frame
 #' @param form character, one of 'tibble' or 'sf' to modify the output
+#' @param fill_names logical, if TRUE fill any missing scientificname values automatically
 #' @param template, NULL or a tibble, if a tibble then trim down to the bare 
 #'   essentials defined by the template
 #' @param date_required logical, if TRUE all eventDate values must be non-NA
@@ -57,6 +58,7 @@ read_species <- function(scientificname = 'Alexandrium affine',
                          fetch = TRUE,
                          bind = TRUE,
                          template = species_template(n=1, eventDate_type = "date"),
+                         fill_names = TRUE,
                          form = c("tibble", "sf")[1],
                          date_required = TRUE){
   
@@ -65,7 +67,7 @@ read_species <- function(scientificname = 'Alexandrium affine',
     fetch = FALSE
   }
   
-  x <- lapply(scientificname,
+  x <- sapply(scientificname,
      function(sciname){
        fname <- file_name(sciname)
        if (file.exists(fname)){
@@ -84,9 +86,12 @@ read_species <- function(scientificname = 'Alexandrium affine',
            x <- dplyr::tibble()
          }
        }
+       if (fill_names){
+         isna <- is.na(x$scientificname)
+         if (any(isna)) x$scientificname[isna] <- sciname
+       }
        x
-      }
-    )
+      }, simplify = FALSE )
   
   
   if (!is.null(template)) x <- lapply(x, as_template, template = template)

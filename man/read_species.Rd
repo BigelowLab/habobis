@@ -9,6 +9,7 @@ read_species(
   fetch = TRUE,
   bind = TRUE,
   template = species_template(n = 1, eventDate_type = "date"),
+  fill_names = TRUE,
   form = c("tibble", "sf")[1],
   date_required = TRUE
 )
@@ -24,6 +25,8 @@ it be fetched from obis?}
 
 \item{template, }{NULL or a tibble, if a tibble then trim down to the bare 
 essentials defined by the template}
+
+\item{fill_names}{logical, if TRUE fill any missing scientificname values automatically}
 
 \item{form}{character, one of 'tibble' or 'sf' to modify the output}
 
